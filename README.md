@@ -1,51 +1,66 @@
-# Quiz Game: "Państwa-Miasta" (States & Cities)
+# Quiz Game: Cities and Countries
 
-A multiplayer quiz game implemented in C (server) and Python with Tkinter (client). Players compete in real-time rounds, answering category-based questions within a time limit. The game logic includes round handling, answer validation, scoring, and dynamic rankings.
+This repository contains the implementation of a multiplayer quiz game focused on geography, programming, chemistry, music genres, athletics, mobile phone brands, Nobel laureates, and more. The game is built with a client-server architecture, allowing multiple players to connect, participate in rounds of trivia questions, and compete for the highest score.
 
-## 🛠 Features
+## Features
 
-- Multiplayer support via TCP sockets (epoll-based server)
-- Graphical client built with Python and Tkinter
-- Configurable game settings and questions via `config.ini`
-- Real-time scoring and ranking system
-- Case-insensitive and uniqueness-based answer validation
-- Automatic game restart after rounds are finished
+- **Multiplayer Support**: Allows multiple players to connect simultaneously and compete in real-time.
+- **Dynamic Configuration**: Game settings and question-answer database loaded from a configuration file (`config.ini`).
+- **Real-time Scoring and Ranking**: Players receive points based on correctness, response uniqueness, and response time.
+- **GUI Client**: User-friendly graphical client implemented with Python's Tkinter.
 
-## 📂 Project Structure
-├── server.c # Server-side logic (C) 
-├── client.py # GUI Client (Python + Tkinter) 
-├── config.ini # Game configuration and questions/answers 
-└── README.md # You are here
+## Project Structure
 
-## ⚙️ Configuration (`config.ini`)
+- **Server** (`server.c`): Implements the core server functionality including managing client connections, game state, question handling, and scoring.
+- **Client** (`client.py`): GUI-based client allowing players to connect to the server, respond to questions, and view real-time updates.
+- **Configuration File** (`config.ini`): Contains game settings and a comprehensive set of trivia questions and answers.
 
-The config file defines:
+## Getting Started
 
-- `TIME_LIMIT`: Time limit for each round (in seconds)
-- `MAX_ROUNDS`: Number of rounds per game
-- A set of `[QUESTION]` / `[ANSWER]` sections:
-  - Each `[QUESTION]` is followed by a single question line.
-  - Then one or more `[ANSWER]` sections provide valid answers.
+### Prerequisites
 
-Example:
+- **Server**: Requires a Unix-like operating system with GCC installed.
+- **Client**: Requires Python 3.x with Tkinter installed.
+
+### Installation
+
+1. Compile the server:
+
+```bash
+gcc server.c -o quiz-server
+```
+
+2. Run the server:
+
+```bash
+./quiz-server
+```
+
+3. Launch the client:
+
+```bash
+python3 client.py [server_ip]
+```
+- If no IP address is specified, it defaults to `127.0.0.1` (localhost).
+
+## Gameplay
+
+- Players provide their nickname upon joining.
+- Each round presents a trivia question loaded from `config.ini`.
+- Players answer questions within a time limit specified in the config file.
+- Points are awarded based on answer correctness, uniqueness, and response speed.
+
+## Customizing Questions
+
+To add or modify questions and answers, edit the `config.ini` file:
+
 ```ini
-TIME_LIMIT=30
-MAX_ROUNDS=10
-
 [QUESTION]
-Name a European country
+Your Question Here
 [ANSWER]
-Germany
-France
-Italy
+Correct Answer 1
+Correct Answer 2
 ...
+```
 
-[QUESTION]
-Name a citrus fruit
-[ANSWER]
-Orange
-Lemon
-...
-
-gcc server.c -o server
-./server
+Developed by Bartłomiej Rudowicz and Paweł Kierkosz.
