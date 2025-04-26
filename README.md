@@ -12,4 +12,40 @@ A multiplayer quiz game implemented in C (server) and Python with Tkinter (clien
 - Automatic game restart after rounds are finished
 
 ## 📂 Project Structure
+├── server.c # Server-side logic (C) 
+├── client.py # GUI Client (Python + Tkinter) 
+├── config.ini # Game configuration and questions/answers 
+└── README.md # You are here
 
+## ⚙️ Configuration (`config.ini`)
+
+The config file defines:
+
+- `TIME_LIMIT`: Time limit for each round (in seconds)
+- `MAX_ROUNDS`: Number of rounds per game
+- A set of `[QUESTION]` / `[ANSWER]` sections:
+  - Each `[QUESTION]` is followed by a single question line.
+  - Then one or more `[ANSWER]` sections provide valid answers.
+
+Example:
+```ini
+TIME_LIMIT=30
+MAX_ROUNDS=10
+
+[QUESTION]
+Name a European country
+[ANSWER]
+Germany
+France
+Italy
+...
+
+[QUESTION]
+Name a citrus fruit
+[ANSWER]
+Orange
+Lemon
+...
+
+gcc server.c -o server
+./server
